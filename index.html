@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>IPNOTEC.BIZ · Many Ideas. One Name.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Audiowide&family=Chakra+Petch:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Chakra Petch',sans-serif;
+  background:linear-gradient(175deg,#fef9ec 0%,#fef3da 25%,#fdf0d0 50%,#fceccc 75%,#fef5e0 100%);
+  color:#3e1500;min-height:100vh;overflow-x:hidden;
+  transition:all .4s;
+}
+body.wide-mode{overflow:hidden;}
+
+/* ── AMBIENT ── */
+.amb{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.25;animation:orbF 10s ease-in-out infinite;}
+.orb-1{width:300px;height:300px;background:radial-gradient(circle,#ffab00,transparent);top:-80px;right:-80px;}
+.orb-2{width:250px;height:250px;background:radial-gradient(circle,#ff6d00,transparent);bottom:10%;left:-60px;animation-delay:3s;animation-direction:reverse;}
+.orb-3{width:180px;height:180px;background:radial-gradient(circle,#ffd600,transparent);top:40%;right:20%;animation-delay:5s;}
+@keyframes orbF{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(20px,-25px) scale(1.12);}}
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(180,120,0,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(180,120,0,.03) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;z-index:0;mask-image:radial-gradient(ellipse at 50% 30%,black 20%,transparent 75%);}
+
+/* ── TOP BAR ── */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:rgba(254,249,236,.75);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,171,0,.12);}
+.topbar-l{display:flex;align-items:center;gap:8px;}
+.topbar-dot{width:7px;height:7px;background:linear-gradient(135deg,#ff8f00,#ffd600);border-radius:50%;box-shadow:0 0 8px rgba(255,143,0,.6);animation:dotP 2s infinite;}
+@keyframes dotP{0%,100%{opacity:1;}50%{opacity:.4;}}
+.topbar-name{font-family:'Audiowide',sans-serif;font-size:11px;letter-spacing:.15em;color:#bf5b00;}
+.topbar-r{display:flex;gap:6px;}
+.mode-btn{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.1em;padding:5px 10px;border:1px solid rgba(180,100,0,.15);border-radius:6px;background:transparent;color:#a07030;cursor:pointer;transition:all .3s;}
+.mode-btn.active{color:#bf5b00;background:rgba(255,171,0,.1);border-color:rgba(255,171,0,.4);}
+
+/* ── MAIN CONTAINER ── */
+.main{position:relative;z-index:1;max-width:480px;margin:0 auto;padding:60px 0 40px;}
+body.wide-mode .main{max-width:1100px;padding-top:60px;}
+
+/* ── GLASS CARD ── */
+.glass{
+  background:rgba(255,255,255,.32);
+  backdrop-filter:blur(20px) saturate(1.3);
+  -webkit-backdrop-filter:blur(20px) saturate(1.3);
+  border:1px solid rgba(255,200,100,.25);
+  border-radius:18px;
+  box-shadow:0 8px 32px rgba(180,100,0,.06),inset 0 1px 0 rgba(255,255,255,.5);
+}
+
+/* ── SECTION: LANDING ── */
+#sec-landing{padding:16px;text-align:center;}
+#sec-landing .hero-card{padding:40px 20px 32px;margin-bottom:12px;position:relative;overflow:hidden;}
+#sec-landing .hero-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(from 180deg at 50% 50%,transparent 0deg,rgba(255,200,50,.05) 60deg,transparent 120deg);animation:hShine 12s linear infinite;pointer-events:none;}
+@keyframes hShine{0%{transform:rotate(0);}100%{transform:rotate(360deg);}}
+.hero-tag{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.25em;color:#c48a40;margin-bottom:16px;}
+.hero-title{font-family:'Audiowide',sans-serif;font-size:clamp(28px,8vw,42px);letter-spacing:.08em;background:linear-gradient(135deg,#bf360c,#e65100,#ff8f00,#ffd600,#ffab00);background-size:200% 200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gShift 5s ease-in-out infinite;line-height:1.1;margin-bottom:10px;}
+@keyframes gShift{0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
+.hero-sub{font-family:'Chakra Petch',sans-serif;font-size:14px;color:#8b5e2f;letter-spacing:.06em;font-weight:400;margin-bottom:6px;}
+.hero-tagline{font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:.2em;color:#d4890a;margin-top:12px;}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 16px 0;}
+.h-stat{padding:10px 6px;text-align:center;}
+.h-stat-v{font-family:'Orbitron',sans-serif;font-size:20px;font-weight:700;color:#bf360c;}
+.h-stat-l{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:.15em;color:#a07030;margin-top:2px;}
+.cta-main{
+  display:block;width:calc(100% - 32px);margin:0 16px;
+  background:linear-gradient(135deg,#e65100,#ff8f00,#ffab00,#ffd600);
+  color:#3e1500;border:none;border-radius:14px;padding:17px;
+  font-family:'Audiowide',sans-serif;font-size:12px;letter-spacing:.16em;
+  cursor:pointer;position:relative;overflow:hidden;
+  box-shadow:0 4px 20px rgba(255,143,0,.25),inset 0 1px 0 rgba(255,255,255,.3);
+  transition:all .25s;
+}
+.cta-main:hover{box-shadow:0 8px 32px rgba(255,143,0,.4);transform:translateY(-2px);}
+.cta-main::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transition:left .5s;}
+.cta-main:hover::before{left:100%;}
+
+/* ── SECTION: ROLE SELECT ── */
+#sec-role{padding:16px;display:none;}
+.role-title{font-family:'Audiowide',sans-serif;font-size:14px;letter-spacing:.1em;color:#a13800;text-align:center;margin-bottom:14px;}
+.role-grid{display:grid;gap:10px;}
+.role-card{padding:16px;cursor:pointer;transition:all .3s;border-left:3px solid rgba(255,171,0,.4);}
+.role-card:hover{background:rgba(255,255,255,.45);border-left-color:#ff8f00;transform:translateX(4px);}
+.role-card-h{font-family:'Audiowide',sans-serif;font-size:12px;color:#a13800;letter-spacing:.05em;margin-bottom:4px;}
+.role-card-p{font-size:12px;color:#6b4020;line-height:1.5;}
+
+/* ── SECTION: VENTURES ── */
+#sec-ventures{padding:16px;display:none;}
+.sec-head{font-family:'Audiowide',sans-serif;font-size:12px;letter-spacing:.18em;color:#d4890a;margin-bottom:12px;padding-left:4px;}
+.vert-label{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.2em;color:#c48a40;margin:18px 0 8px 4px;display:flex;align-items:center;gap:8px;}
+.vert-label::after{content:'';flex:1;height:1px;background:rgba(200,150,50,.2);}
+.v-card{padding:14px 16px;margin-bottom:10px;border-left:3px solid rgba(255,171,0,.4);transition:all .3s;cursor:pointer;}
+.v-card:hover{border-left-color:#ff8f00;background:rgba(255,255,255,.4);transform:translateX(3px);}
+.v-card.expanded{background:rgba(255,255,255,.45);border-left-color:#e65100;}
+.v-name{font-family:'Audiowide',sans-serif;font-size:13px;color:#a13800;letter-spacing:.04em;}
+.v-usp{font-size:12px;color:#6b4020;margin-top:3px;line-height:1.5;}
+.v-details{display:none;margin-top:10px;padding-top:10px;border-top:1px solid rgba(200,150,50,.15);}
+.v-card.expanded .v-details{display:block;}
+.v-row{display:flex;justify-content:space-between;align-items:baseline;padding:3px 0;font-size:11px;}
+.v-row-l{color:#a07030;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.08em;}
+.v-row-r{color:#5d3a1a;text-align:right;max-width:60%;}
+.v-links{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
+.v-link{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.1em;padding:6px 12px;border:1px solid rgba(255,171,0,.3);border-radius:8px;color:#bf5b00;text-decoration:none;transition:all .2s;}
+.v-link:hover{background:rgba(255,171,0,.1);border-color:#ff8f00;}
+
+/* ── PITCH MINI DECK ── */
+.pitch-overlay{display:none;position:fixed;inset:0;z-index:2000;background:rgba(30,15,0,.85);backdrop-filter:blur(10px);align-items:center;justify-content:center;}
+.pitch-overlay.show{display:flex;}
+.pitch-deck{width:90%;max-width:600px;max-height:80vh;overflow-y:auto;padding:28px 22px;border-radius:18px;background:rgba(30,15,0,.92);backdrop-filter:blur(20px);border:1px solid rgba(255,171,0,.2);box-shadow:0 8px 32px rgba(0,0,0,.4);}
+.pitch-close{position:absolute;top:14px;right:18px;font-family:'Share Tech Mono',monospace;font-size:11px;color:#ffab00;cursor:pointer;letter-spacing:.1em;}
+.pitch-slide{margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid rgba(255,171,0,.15);}
+.pitch-slide:last-child{border-bottom:none;}
+.pitch-sn{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:.2em;color:#ffab00;margin-bottom:4px;}
+.pitch-sh{font-family:'Audiowide',sans-serif;font-size:14px;color:#ffd600;margin-bottom:6px;}
+.pitch-sp{font-size:13px;color:rgba(255,255,255,.85);line-height:1.65;}
+
+/* ── SECTION: FOUNDER ── */
+#sec-founder{padding:16px;display:none;}
+.founder-card{padding:24px 18px;position:relative;}
+.founder-name{font-family:'Audiowide',sans-serif;font-size:20px;color:#a13800;letter-spacing:.06em;margin-bottom:4px;}
+.founder-role{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.18em;color:#c48a40;margin-bottom:14px;}
+.founder-bio{font-size:13px;color:#5d3a1a;line-height:1.7;margin-bottom:16px;}
+.founder-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
+.f-chip{padding:8px 10px;text-align:center;font-size:10px;font-family:'Share Tech Mono',monospace;letter-spacing:.08em;color:#8b5e2f;}
+.f-chip-v{font-family:'Orbitron',sans-serif;font-size:16px;font-weight:700;color:#bf360c;margin-bottom:2px;}
+.founder-connect{margin-top:12px;padding:18px;text-align:center;border:1px solid rgba(255,143,0,.25);border-radius:14px;background:rgba(255,255,255,.2);}
+.fc-title{font-family:'Audiowide',sans-serif;font-size:13px;color:#a13800;letter-spacing:.08em;margin-bottom:6px;}
+.fc-price{font-family:'Orbitron',sans-serif;font-size:28px;font-weight:800;color:#e65100;margin-bottom:4px;}
+.fc-note{font-size:11px;color:#a07030;margin-bottom:12px;}
+.fc-btn{
+  display:inline-block;width:100%;padding:14px;border:none;border-radius:12px;
+  background:linear-gradient(135deg,#bf360c,#e65100,#ff8f00);color:#fff;
+  font-family:'Audiowide',sans-serif;font-size:11px;letter-spacing:.14em;cursor:pointer;
+  box-shadow:0 4px 16px rgba(191,54,12,.25);transition:all .25s;
+}
+.fc-btn:hover{box-shadow:0 6px 24px rgba(191,54,12,.35);transform:translateY(-1px);}
+.fc-reveal{display:none;margin-top:14px;padding:14px;border-radius:10px;background:rgba(255,255,255,.3);text-align:center;}
+.fc-reveal .fc-num{font-family:'Orbitron',sans-serif;font-size:18px;font-weight:700;color:#bf360c;letter-spacing:.1em;margin-bottom:4px;}
+.fc-reveal .fc-lbl{font-size:10px;color:#a07030;font-family:'Share Tech Mono',monospace;letter-spacing:.12em;}
+
+/* ── SECTION: AI CONCIERGE ── */
+#sec-ai{padding:16px;display:none;}
+.ai-box{padding:16px;max-height:55vh;display:flex;flex-direction:column;}
+.ai-head{font-family:'Audiowide',sans-serif;font-size:12px;letter-spacing:.12em;color:#a13800;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.ai-head-dot{width:6px;height:6px;background:#4caf50;border-radius:50%;box-shadow:0 0 6px rgba(76,175,80,.5);}
+.ai-msgs{flex:1;overflow-y:auto;margin-bottom:10px;min-height:100px;max-height:40vh;}
+.ai-msg{padding:8px 12px;border-radius:10px;margin-bottom:6px;font-size:12px;line-height:1.6;max-width:88%;animation:msgIn .3s ease;}
+@keyframes msgIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.ai-msg.bot{background:rgba(255,255,255,.4);color:#3e1500;border:1px solid rgba(255,200,100,.15);}
+.ai-msg.user{background:rgba(191,54,12,.08);color:#5d3a1a;margin-left:auto;border:1px solid rgba(191,54,12,.1);}
+.ai-msg.typing{color:#a07030;font-style:italic;}
+.ai-input-row{display:flex;gap:6px;}
+.ai-input{flex:1;padding:10px 14px;border:1px solid rgba(255,171,0,.2);border-radius:10px;background:rgba(255,255,255,.35);font-family:'Chakra Petch',sans-serif;font-size:12px;color:#3e1500;outline:none;transition:border-color .2s;}
+.ai-input:focus{border-color:rgba(255,143,0,.5);}
+.ai-send{padding:10px 16px;border:none;border-radius:10px;background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;font-family:'Audiowide',sans-serif;font-size:10px;letter-spacing:.1em;cursor:pointer;transition:all .2s;}
+.ai-send:hover{box-shadow:0 2px 12px rgba(255,143,0,.3);}
+
+/* ── NAV TABS ── */
+.nav{position:fixed;bottom:0;left:0;right:0;z-index:1000;display:none;justify-content:center;gap:2px;padding:8px 10px 12px;background:rgba(254,249,236,.8);backdrop-filter:blur(16px);border-top:1px solid rgba(255,171,0,.1);}
+.nav.show{display:flex;}
+.nav-btn{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:.1em;padding:8px 10px;border:none;border-radius:8px;background:transparent;color:#a07030;cursor:pointer;transition:all .2s;flex:1;text-align:center;}
+.nav-btn.active{background:rgba(255,171,0,.1);color:#bf5b00;}
+
+/* ── FOOTER ── */
+.footer{text-align:center;padding:16px;font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:.14em;color:#c9a06a;}
+
+/* ── WIDE MODE ── */
+body.wide-mode .main{padding-bottom:20px;}
+body.wide-mode #sec-ventures .v-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+body.wide-mode .hero-title{font-size:52px;}
+body.wide-mode .founder-grid{grid-template-columns:repeat(4,1fr);}
+
+/* ── SCROLL ── */
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-thumb{background:rgba(255,171,0,.2);border-radius:4px;}
+
+/* ── BACK BTN ── */
+.back-btn{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.12em;color:#c48a40;cursor:pointer;margin-bottom:10px;display:inline-flex;align-items:center;gap:4px;padding:4px 0;border:none;background:none;}
+.back-btn:hover{color:#bf5b00;}
+</style>
+</head>
+<body>
+
+<!-- AMBIENT -->
+<div class="amb"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
+<div class="grid-bg"></div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-l"><div class="topbar-dot"></div><span class="topbar-name">IPNOTEC.BIZ</span></div>
+  <div class="topbar-r">
+    <button class="mode-btn active" onclick="setMode('mobile')">MOBILE</button>
+    <button class="mode-btn" onclick="setMode('wide')">16:9</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- ═══ LANDING ═══ -->
+<div id="sec-landing">
+  <div class="hero-card glass">
+    <div class="hero-tag">CIN: U63122KA2026OPC214615 · BENGALURU</div>
+    <div class="hero-title">IPNOTEC</div>
+    <div class="hero-sub">Many Ideas. One Name. One Corporation.</div>
+    <div class="hero-tagline">SIGNAL OVER NOISE · ALWAYS</div>
+    <div class="hero-stats">
+      <div class="h-stat glass"><div class="h-stat-v">24</div><div class="h-stat-l">VENTURES</div></div>
+      <div class="h-stat glass"><div class="h-stat-v">6</div><div class="h-stat-l">VERTICALS</div></div>
+      <div class="h-stat glass"><div class="h-stat-v">8</div><div class="h-stat-l">BRANDS</div></div>
+    </div>
+  </div>
+  <button class="cta-main" onclick="showSection('sec-role')">LET'S TALK BUSINESS →</button>
+</div>
+
+<!-- ═══ ROLE SELECT ═══ -->
+<div id="sec-role">
+  <button class="back-btn" onclick="showSection('sec-landing')">← BACK</button>
+  <div class="role-title">WHO ARE YOU?</div>
+  <div class="role-grid">
+    <div class="role-card glass" onclick="enterAs('investor')">
+      <div class="role-card-h">INVESTOR</div>
+      <div class="role-card-p">See business models, unit economics, market sizing, and the ₹45L seed pitch.</div>
+    </div>
+    <div class="role-card glass" onclick="enterAs('collaborator')">
+      <div class="role-card-h">COLLABORATOR / PARTNER</div>
+      <div class="role-card-p">Explore ventures, try live emulations, and find where your expertise fits.</div>
+    </div>
+    <div class="role-card glass" onclick="enterAs('curious')">
+      <div class="role-card-h">JUST CURIOUS</div>
+      <div class="role-card-p">Browse everything. Play with demos. Understand the IPNOTEC universe.</div>
+    </div>
+    <div class="role-card glass" onclick="enterAs('ai')">
+      <div class="role-card-h">TALK TO AI CONCIERGE</div>
+      <div class="role-card-p">Ask anything about IPNOTEC — the AI knows every venture, every number.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ VENTURES ═══ -->
+<div id="sec-ventures">
+  <button class="back-btn" onclick="showSection('sec-role')">← BACK</button>
+  <div class="sec-head">IPNOTEC UNIVERSE</div>
+  <div id="ventureContainer"></div>
+</div>
+
+<!-- ═══ FOUNDER ═══ -->
+<div id="sec-founder">
+  <button class="back-btn" onclick="showSection('sec-ventures')">← BACK</button>
+  <div class="sec-head">FOUNDER</div>
+  <div class="founder-card glass">
+    <div class="founder-name">BHARATH BHOLEY</div>
+    <div class="founder-role">FOUNDER & CEO · IPNOTEC CORP</div>
+    <div class="founder-bio">
+      20-year IT veteran turned entrepreneur. BE in Information Science from UVCE, Bangalore University (2005) and MBA in Entrepreneurship & Innovation from Manipal (MAHE, 2025). Spent 13 years at Ericsson leading global ITSM programmes — cloud migrations, data-centre shutdowns, and enterprise asset rationalisation at scale. Previously at Goldman Sachs (mobile infrastructure), Cognizant (service ops), and HP/EDS (Bank of America support). Now channelling two decades of enterprise experience into building India's first verified networking ecosystem — where your phone is your router, your identity is your signal, and noise is not welcome.
+    </div>
+    <div class="founder-grid">
+      <div class="f-chip glass"><div class="f-chip-v">20</div>YRS CORPORATE</div>
+      <div class="f-chip glass"><div class="f-chip-v">13</div>YRS ERICSSON</div>
+      <div class="f-chip glass"><div class="f-chip-v">MBA</div>MANIPAL 2025</div>
+      <div class="f-chip glass"><div class="f-chip-v">BE</div>UVCE 2005</div>
+    </div>
+    <div class="founder-connect" id="founderConnect">
+      <div class="fc-title">YOUR TICKET TO THE FUTURE</div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.18em;color:#c48a40;margin-bottom:10px;">TICKET PRICE FOR V[IP] ID</div>
+      <div class="fc-price">₹1001</div>
+      <div class="fc-note">One-time ticket · Early adopter closed group · Founder direct line</div>
+      <button class="fc-btn" onclick="payFounderConnect()">PAY & STEP INTO THE FUTURE →</button>
+      <div class="fc-reveal" id="fcReveal">
+        <div class="fc-lbl">✓ PAYMENT CONFIRMED · WELCOME TO THE FUTURE</div>
+        <div style="margin-top:12px;font-family:'Audiowide',sans-serif;font-size:12px;color:#a13800;letter-spacing:.08em;">BOOK YOUR FUTURE UNIQUE ID</div>
+        <input type="text" id="vipIdInput" placeholder="CHOOSE YOUR V[IP] ID" style="width:100%;margin-top:8px;padding:10px 14px;border:1px solid rgba(255,171,0,.3);border-radius:10px;background:rgba(255,255,255,.3);font-family:'Share Tech Mono',monospace;font-size:12px;color:#3e1500;letter-spacing:.08em;text-align:center;outline:none;text-transform:uppercase;">
+        <button onclick="lockVipId()" style="margin-top:8px;width:100%;padding:12px;border:none;border-radius:10px;background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;font-family:'Audiowide',sans-serif;font-size:10px;letter-spacing:.12em;cursor:pointer;">LOCK MY V[IP] ID →</button>
+        <div id="vipConfirm" style="display:none;margin-top:12px;padding:12px;border-radius:10px;background:rgba(46,125,50,.1);border:1px solid rgba(46,125,50,.2);">
+          <div style="font-family:'Audiowide',sans-serif;font-size:11px;color:#2e7d32;letter-spacing:.08em;">✓ V[IP] ID LOCKED</div>
+          <div id="vipIdDisplay" style="font-family:'Orbitron',sans-serif;font-size:18px;font-weight:700;color:#bf360c;margin:6px 0;letter-spacing:.1em;"></div>
+          <div style="font-size:10px;color:#6b4020;line-height:1.5;">You are now an early adopter. Welcome to the closed group.<br>Founder direct connect:</div>
+          <div class="fc-num" style="font-family:'Orbitron',sans-serif;font-size:16px;font-weight:700;color:#bf360c;letter-spacing:.1em;margin-top:6px;">+91 9115481001</div>
+          <div class="fc-lbl" style="margin-top:4px;">BHARATH BHOLEY · FOUNDER / CEO</div>
+          <div style="margin-top:6px;font-size:10px;color:#6b4020;">WhatsApp or Call · Mention your V[IP] ID</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ AI CONCIERGE ═══ -->
+<div id="sec-ai">
+  <button class="back-btn" onclick="showSection('sec-role')">← BACK</button>
+  <div class="sec-head">AI CONCIERGE</div>
+  <div class="ai-box glass">
+    <div class="ai-head"><div class="ai-head-dot"></div>IPNOTEC AI · ONLINE</div>
+    <div class="ai-msgs" id="aiMsgs">
+      <div class="ai-msg bot">Welcome to IPNOTEC. I know every venture, every business model, every number. Ask me anything — "What's CLUBICLES?", "Show me the pitch", "Which ventures make money?"</div>
+    </div>
+    <div class="ai-input-row">
+      <input class="ai-input" id="aiInput" placeholder="Ask about any venture..." onkeydown="if(event.key==='Enter')sendAI()">
+      <button class="ai-send" onclick="sendAI()">SEND</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<div class="footer">IPNOTEC CORP · OPC PVT LTD · CIN: U63122KA2026OPC214615 · BENGALURU · 2026</div>
+</div>
+
+<!-- NAV -->
+<div class="nav" id="mainNav">
+  <button class="nav-btn active" data-s="sec-ventures" onclick="navTo('sec-ventures')">VENTURES</button>
+  <button class="nav-btn" data-s="sec-founder" onclick="navTo('sec-founder')">FOUNDER</button>
+  <button class="nav-btn" data-s="sec-ai" onclick="navTo('sec-ai')">AI CONCIERGE</button>
+</div>
+
+<!-- PITCH OVERLAY -->
+<div class="pitch-overlay" id="pitchOverlay">
+  <div class="pitch-deck" id="pitchDeck" style="position:relative;">
+    <div class="pitch-close" onclick="closePitch()">✕ CLOSE</div>
+    <div id="pitchContent"></div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════
+// VENTURE DATA
+// ══════════════════════════════════════
+var V = [
+  // CORE NETWORKING
+  {cat:"CORE NETWORKING",name:"IPNOTEC.COM",usp:"Your phone is the router. 11 verified nodes. Text-only. Zero noise.",model:"Subscription",price:"₹101/month",tam:"750M smartphones in India",competitor:"WhatsApp Groups",diff:"Verified identity + text-only = zero noise. No media, no forwards.",link:"https://com1-tawny.vercel.app/",pitch:["THE PROBLEM|India's 750M smartphone users coordinate through WhatsApp — drowning in media, forwards, and noise. No verified identity. No signal.","THE SOLUTION|IPNOTEC.COM turns your phone into a verified WiFi hotspot. 11 VIBGYOR-colored nodes. Text-only chat. Session archived to floppy disk cards with AI summary.","THE MARKET|750M smartphones × 2% early adopters = 15M users. At ₹101/month = ₹1,800 Cr TAM.","THE MODEL|₹101/month subscription via UPI. Zero hardware cost. User's own data plan is the infrastructure. 90%+ gross margin.","THE ASK|Seed ₹45L for MVP launch in Bengaluru. Target 1,000 hubs in 6 months."]},
+  {cat:"CORE NETWORKING",name:"IPNOTEC.NET · RECON 505",usp:"55-node mesh network with dedicated hardware. Enterprise-grade personal networking.",model:"Hardware + Subscription",price:"₹50,005 kit + ₹505/month",tam:"Enterprise WiFi market ₹4,200 Cr",competitor:"Google Nest WiFi / Ubiquiti",diff:"Verified SSID identity bonded to phone. Not just WiFi — it's a named, authenticated mesh.",link:"https://net-delta.vercel.app",pitch:["THE PROBLEM|Home/office WiFi is anonymous infrastructure. No identity, no session logs, no verified mesh.","THE SOLUTION|RECON 505: pre-configured I-NET Node Kit. 55 verified nodes. Aadhaar + geo-locked identity. 24hr tape backup. Full admin dashboard.","THE MARKET|India's enterprise WiFi market at ₹4,200 Cr growing 18% YoY. Premium home networking rising.","THE MODEL|₹50,005 one-time hardware + ₹505/month platform. Hardware at 40% margin, subscription at 85%.","THE ASK|₹25L for first batch of 100 Node Kits + manufacturing partner."]},
+  {cat:"CORE NETWORKING",name:"IPNOTEC.VIP",usp:"Lock your future digital identity today. First-mover verified profile.",model:"One-time purchase",price:"₹1,001",tam:"Digital identity market",competitor:"LinkedIn Premium",diff:"Permanent identity lock — not a subscription. Your number, your SSID, your future.",link:"https://www.ipnotec.vip",pitch:["THE PROBLEM|Digital identity is fragmented — LinkedIn, Twitter, Instagram. None tied to verified phone identity.","THE SOLUTION|IPNOTEC.VIP: pay ₹1,001 once. Lock your verified identity forever. First to step into the future.","THE MARKET|India's 200M digitally active professionals. At 1% conversion = 2M × ₹1,001 = ₹200 Cr.","THE MODEL|One-time ₹1,001 payment. Zero recurring cost to serve. Pure margin post-acquisition.","THE ASK|Part of IPNOTEC.COM ecosystem. No separate raise needed."]},
+  {cat:"CORE NETWORKING",name:"PUBLIC HOTSPOT · ISP",usp:"100-inch screen public internet pods. Starlink + dual fiber. Revenue-sharing ecosystem.",model:"Revenue share + Ads",price:"Pod deployment partnership",tam:"Public WiFi ₹2,100 Cr",competitor:"Google Station (discontinued)",diff:"Google Station shut down. No one owns public WiFi in India. First mover with 100\" screen services.",link:"https://isp-theta.vercel.app",pitch:["THE PROBLEM|Google Station died. India has zero organised public WiFi infrastructure with monetisation.","THE SOLUTION|100-inch screen pods at malls, airports, hospitals, campuses. Starlink + dual fiber. Local community services + advertising revenue.","THE MARKET|₹2,100 Cr public WiFi market. Zero organised players post-Google Station exit.","THE MODEL|Pod revenue share with venue owners. Ad revenue from 100\" screens. Data services margin.","THE ASK|₹15L per pod deployment. Pilot at 5 Bengaluru locations."]},
+  {cat:"CORE NETWORKING",name:"IPNOTEC PINGG",usp:"Productive networking — signal over noise, always.",model:"Freemium",price:"Free + Premium",tam:"Professional networking",competitor:"Slack / Discord",diff:"Built for productive 1:1 pings, not group chaos.",link:"https://pingg-tau.vercel.app",pitch:["THE PROBLEM|Professional communication tools create noise — channels, threads, notifications.","THE SOLUTION|PINGG: one productive ping at a time. Verified sender. No channels. No threads. Just signal.","THE MARKET|India's 80M knowledge workers spend 2.5 hrs/day on work messaging.","THE MODEL|Free tier for individuals. Premium ₹199/month for teams with analytics.","THE ASK|Integrated into IPNOTEC ecosystem. Cross-venture networking layer."]},
+  // BUSINESS & PROFESSIONAL
+  {cat:"BUSINESS & PROFESSIONAL",name:"IPNOTEC SOLUTIONS",usp:"Enterprise cloud infrastructure. 20% cheaper than AWS. GPU-ready.",model:"Enterprise SaaS",price:"Custom pricing",tam:"India cloud ₹65,000 Cr",competitor:"AWS / Azure",diff:"India-first managed cloud with A100/H100 GPU. SOC2 + GDPR. 99.999% SLA.",link:"https://solutions-orcin.vercel.app",pitch:["THE PROBLEM|AWS/Azure are expensive, US-headquartered, and not optimised for Indian enterprise needs.","THE SOLUTION|IPNOTEC SOLUTIONS: fully managed cloud. GPU infra for AI/LLM. Kubernetes. 20% cheaper than AWS.","THE MARKET|India's cloud market at ₹65,000 Cr, growing 25% YoY.","THE MODEL|Consumption-based + reserved instances. Average deal size ₹8L/year.","THE ASK|₹50L for infrastructure setup + first 10 enterprise clients."]},
+  {cat:"BUSINESS & PROFESSIONAL",name:"JOBZ.BAR",usp:"The world's first bar industry jobs platform. 21+ verified.",model:"Commission + Subscription",price:"Free for seekers, ₹999/listing",tam:"Global bar industry $300B",competitor:"Indeed / Hosco",diff:"Niche-vertical for bar/hospitality. Age-verified. Cultural fit matching — not just skills.",link:"https://jobzbar-0303.vercel.app",pitch:["THE PROBLEM|Bar industry hiring is word-of-mouth. No dedicated platform. Indeed doesn't understand bar culture.","THE SOLUTION|JOBZ.BAR: age-verified (21+), persona-based matching. Bartenders, servers, bouncers, managers.","THE MARKET|India's 7.5L+ bars & pubs. Global bar industry at $300B.","THE MODEL|Free for job seekers. ₹999/listing for venues. Premium placement ₹4,999.","THE ASK|₹10L for platform build + launch in Bengaluru's 3,000+ bars."]},
+  {cat:"BUSINESS & PROFESSIONAL",name:"CLUBICLES",usp:"One micro-coworking space near every Post Office in India. Asset-light aggregation.",model:"Platform fee + F11 equity",price:"Pay-per-use from ₹99/hr",tam:"₹8,500 Cr coworking India",competitor:"WeWork / 91springboard",diff:"Not building spaces — aggregating idle ones. F11 Club (11% equity) scouts and scales. Post office proximity.",link:"https://1-m-clubicles-2.vercel.app",pitch:["THE PROBLEM|Coworking is expensive (₹8K–15K/month). Millions of idle local spaces exist unused.","THE SOLUTION|CLUBICLES aggregates idle spaces into standardised micro-coworking zones. One near every Post Office.","THE MARKET|India coworking at ₹8,500 Cr. 1.55L Post Offices = 1.55L potential locations.","THE MODEL|Platform fee per booking. Space owners earn per hour. F11 Club scouts for 11% equity.","THE ASK|₹12L for platform + first 50 CLUBICLES in Bengaluru."]},
+  {cat:"BUSINESS & PROFESSIONAL",name:"BHRATHA.DEV",usp:"India's verified digital professional network. Aadhaar + location stamped.",model:"Subscription + Lead-gen",price:"Free profile, ₹299/month premium",tam:"Digital services ₹2.8L Cr",competitor:"LinkedIn / Upwork",diff:"Every member physically verified at a BHRATHA office. Aadhaar OTP + GPS stamp. Digital estate focus.",link:"https://bhratha-dev.vercel.app",pitch:["THE PROBLEM|LinkedIn profiles are unverified. Upwork has no physical identity layer. Trust is assumed.","THE SOLUTION|BHRATHA.DEV: every member Aadhaar-verified + physically stamped at a BHRATHA office. One person, one record.","THE MARKET|India's 3 Cr+ professionals across digital services.","THE MODEL|Free basic profile. ₹299/month for premium + lead generation. Enterprise API at ₹2,999/month.","THE ASK|₹20L for 100 BHRATHA verification offices across Bengaluru."]},
+  {cat:"BUSINESS & PROFESSIONAL",name:"BHRATHA DEVELOPERS",usp:"Pincode-verified handymen. Real estate focused. Identity-first local services.",model:"Lead generation fee",price:"₹49 per lead",tam:"Home services ₹15,000 Cr",competitor:"Urban Company",diff:"Real estate specialisation. Pincode-level verification. Not gig economy — verified local professionals.",link:"https://bhratha-developers.vercel.app",pitch:["THE PROBLEM|Urban Company is expensive and metro-only. Local handymen have zero digital presence.","THE SOLUTION|BHRATHA DEVELOPERS: pincode-verified handymen for real estate. Plumbers, electricians, painters — all Aadhaar verified.","THE MARKET|India home services at ₹15,000 Cr. 19,101 PIN codes to cover.","THE MODEL|₹49 per qualified lead to handymen. Zero subscription. Pay-per-outcome.","THE ASK|₹8L for platform + verification of first 500 handymen in Bengaluru."]},
+  {cat:"BUSINESS & PROFESSIONAL",name:"IPNOTEC I2I · INTERNSHIPS",usp:"Innovative internships that bridge education and industry. Earn while you learn.",model:"Platform + Placement fee",price:"₹999 enrollment",tam:"₹4,500 Cr edtech placement",competitor:"Internshala",diff:"Real-world project integration, not listings. Earn-while-learn with skill certification.",link:"https://internships-livid.vercel.app",pitch:["THE PROBLEM|93% of students know only 7 career options. 42.6% graduates are unemployable.","THE SOLUTION|I2I: innovative internships with real projects. Students earn while learning. Skill gap bridged.","THE MARKET|India's 40M college students. Internship market at ₹4,500 Cr.","THE MODEL|₹999 student enrollment. ₹9,999 company placement fee. Certification revenue.","THE ASK|₹7L for platform + partnerships with 20 Bengaluru colleges."]},
+  // LIFESTYLE & COMMUNITY
+  {cat:"LIFESTYLE & COMMUNITY",name:"BBL · BHRATHA BIKING LIMITED",usp:"India's disciplined biking community. Pack riding with verified riders.",model:"Free community + Events",price:"Free membership",tam:"Biking community 2Cr riders",competitor:"BikestersCafe / Riderhood",diff:"Not social media — it's a Club OS. Pack hierarchy, live communicator, ride planning. Discipline-first.",link:"https://bbl-rosy.vercel.app/",pitch:["THE PROBLEM|Biking groups are scattered across WhatsApp. No structure, no safety protocol, no ride OS.","THE SOLUTION|BBL: a Club OS for bikers. Pack hierarchy, live ride communicator, verified rider profiles.","THE MARKET|India's 2 Cr+ active motorcycle enthusiasts.","THE MODEL|Free membership. Revenue from events, merchandise, and ride-route sponsorships.","THE ASK|₹5L for BBL app + first 10 organised rides."]},
+  {cat:"LIFESTYLE & COMMUNITY",name:"CAROBAR.LIVE",usp:"India's freshest car market. PAN-verified. Updated daily.",model:"Transaction fee",price:"₹999 listing + 1% transaction",tam:"Used car ₹1.8L Cr",competitor:"CarDekho / OLX Autos",diff:"PAN-linked identity. Individual vs company auto-detected. Daily-fresh inventory. No stale listings.",link:"https://carobar-gamma.vercel.app/",pitch:["THE PROBLEM|Car marketplaces are full of stale listings, fake dealers, and no identity verification.","THE SOLUTION|CAROBAR.LIVE: PAN-verified buyers and sellers. Auto-classification. Daily-fresh inventory.","THE MARKET|India used car market at ₹1.8L Cr growing 15% YoY.","THE MODEL|₹999 per listing. 1% transaction fee on successful sale. Premium listing at ₹4,999.","THE ASK|₹10L for platform + launch in Bengaluru auto market."]},
+  {cat:"LIFESTYLE & COMMUNITY",name:"BLACKBERRY.BHAI",usp:"The BlackBerry fan network. Nostalgia meets networking.",model:"Community + Merchandise",price:"Free to join",tam:"BB nostalgia community",competitor:"CrackBerry (defunct)",diff:"Only active BlackBerry community platform. Device emulation + Bhai network identity.",link:"https://bbbh-ai.vercel.app/",pitch:["THE PROBLEM|BlackBerry is dead but the community isn't. CrackBerry shut down. Fans have no home.","THE SOLUTION|BLACKBERRY.BHAI: device emulation, colour-coded Bhai IDs, bazaar, and nostalgia directory.","THE MARKET|Global BlackBerry nostalgia community — 50M+ former users.","THE MODEL|Free community. Revenue from merchandise, device accessories, and premium handles.","THE ASK|₹3L for community platform + Canada partnership exploration."]},
+  {cat:"LIFESTYLE & COMMUNITY",name:"IPNOTEC.BUZZ",usp:"Hemp networking for legal markets. 21+ age-verified. The Order.",model:"Membership",price:"₹505/month",tam:"Legal cannabis $55B global",competitor:"Leafly / WeedMaps",diff:"Networking-first, not marketplace. Verified age + identity. Ritual-based community. Select countries only.",link:"https://ipnotecbuzz.vercel.app/",pitch:["THE PROBLEM|Legal cannabis markets lack verified professional networking. Leafly is a marketplace, not a community.","THE SOLUTION|IPNOTEC.BUZZ: 21+ verified networking. Ritual-based membership. Professional cannabis community.","THE MARKET|Legal cannabis market at $55B globally, growing 25% YoY.","THE MODEL|₹505/month membership. Available only in legal jurisdictions.","THE ASK|₹8L for platform + legal framework in 3 pilot countries."]},
+  // CULTURE & EXPERIENCE
+  {cat:"CULTURE & EXPERIENCE",name:"BH₹ATHA HUF · VERSE",usp:"India's first interactive HUF tax simulator. Learn the wealth instrument most families ignore.",model:"One-time purchase",price:"₹108",tam:"Tax planning ₹3,200 Cr",competitor:"ClearTax (info only)",diff:"Not articles — it's a live Karta Life Simulator. Play through HUF scenarios with real tax math.",link:"https://bhratha-huf.vercel.app/",pitch:["THE PROBLEM|HUF (Hindu Undivided Family) saves lakhs in tax. 90% of eligible families don't use it because they don't understand it.","THE SOLUTION|BH₹ATHA VERSE: interactive Karta Life Simulator. Play through ₹1 Crore scenarios. See real tax savings.","THE MARKET|India's 25 Cr+ Hindu families eligible for HUF. Tax planning market at ₹3,200 Cr.","THE MODEL|₹108 one-time game purchase. Upsell to CA consultation at ₹2,999.","THE ASK|₹4L for simulator polish + CA partner network."]},
+  {cat:"CULTURE & EXPERIENCE",name:"RWAWE",usp:"Rise With Awareness. Global Hindu United Family platform.",model:"Donation + Events",price:"Free to join",tam:"Global Hindu diaspora 1.2B",competitor:"No direct competitor",diff:"Not religious — awareness-first. Global unity platform for Hindu identity and culture.",link:"https://rwawe.vercel.app/",pitch:["THE PROBLEM|1.2B Hindus globally lack a unified cultural awareness platform. Fragmented across regional orgs.","THE SOLUTION|RWAWE: Rise With Awareness. A global platform for Hindu cultural unity and education.","THE MARKET|1.2B Hindus globally. Diaspora spending on cultural events: $2B+ annually.","THE MODEL|Free membership. Revenue from cultural events, courses, and donations.","THE ASK|₹6L for platform + launch in 5 countries."]},
+  {cat:"CULTURE & EXPERIENCE",name:"IPNOTEC STUDIOS",usp:"India's own luxury creative hub. 360° immersive production. The future of creation.",model:"Studio rental + Production",price:"₹25,000/day",tam:"Content creation ₹12,000 Cr",competitor:"Yash Raj Studios",diff:"Not just a studio — a futuristic immersive tech-art space. 360° screens. AI-assisted production.",link:"https://studios-pearl.vercel.app/",pitch:["THE PROBLEM|Indian creators lack accessible, tech-forward production spaces. Studios are either cheap-basic or Bollywood-exclusive.","THE SOLUTION|IPNOTEC STUDIOS: immersive 360° screens, AI tools, luxury creative environment.","THE MARKET|India content creation at ₹12,000 Cr growing 30% YoY.","THE MODEL|₹25,000/day studio rental. Production services at custom pricing. Equipment rental.","THE ASK|₹30L for first studio setup in Bengaluru."]},
+  {cat:"CULTURE & EXPERIENCE",name:"DREAM MACHINE",usp:"Your subconscious journal. Log, reflect, and connect with fellow dreamers.",model:"Freemium",price:"Free + ₹99/month premium",tam:"Wellness apps ₹1,800 Cr",competitor:"DreamApp / Lucidity",diff:"Not just logging — AI mood analysis, streak tracking, and a dreamer community.",link:"https://dream-machine-beta.vercel.app/",pitch:["THE PROBLEM|Dreams are the most personal data we generate — and we lose them by breakfast.","THE SOLUTION|DREAM MACHINE: 60-second daily dream check-in. AI mood tagging. 7-day streak. Community.","THE MARKET|Wellness app market at ₹1,800 Cr. Sleep/dream niche underserved.","THE MODEL|Free basic logging. ₹99/month for AI analysis, patterns, and dreamer network.","THE ASK|₹3L for AI integration + community features."]},
+  {cat:"CULTURE & EXPERIENCE",name:"TIME MACHINE",usp:"Interactive break room activity for teams and individuals. Wellness through nostalgia.",model:"Enterprise SaaS",price:"₹4,999/month per team",tam:"Employee wellness ₹2,500 Cr",competitor:"Donut (Slack)",diff:"Two modes: Individual reflection + Group bonding. Not random coffee — structured time travel experiences.",link:"https://time-machine-psi.vercel.app/",link2:"https://time-machine-group.vercel.app/",pitch:["THE PROBLEM|Remote teams lack meaningful break activities. Donut is random. No structure.","THE SOLUTION|TIME MACHINE: guided nostalgia journeys for individuals and groups. Structured break room wellness.","THE MARKET|Employee wellness at ₹2,500 Cr. Remote work tools growing 35% YoY.","THE MODEL|₹4,999/month per team (up to 50 members). Individual free tier.","THE ASK|₹5L for enterprise features + 10 pilot companies."]},
+  {cat:"CULTURE & EXPERIENCE",name:"MIND OF MULTIVERSE",usp:"Organising networking for every thought. Your mind, structured.",model:"Freemium",price:"Free + ₹149/month",tam:"Productivity tools ₹6,000 Cr",competitor:"Notion / Obsidian",diff:"Not notes — thoughts. Networking layer for ideas. Connect thoughts across people.",link:"https://multiverse-rosy.vercel.app/",pitch:["THE PROBLEM|Your best ideas are scattered across 15 apps. No tool organises thoughts as a network.","THE SOLUTION|MIND OF MULTIVERSE: every thought is a node. Connect, cluster, and share thought networks.","THE MARKET|Productivity tools at ₹6,000 Cr. Knowledge management growing 20% YoY.","THE MODEL|Free personal use. ₹149/month for team thought networks and AI clustering.","THE ASK|₹6L for thought-graph engine + AI integration."]},
+  // FINANCE & TRAVEL
+  {cat:"FINANCE & TRAVEL",name:"IPNOTEC UNITS",usp:"Gold-pegged travel currency. 1 IU = ₹1,001. Plan trips in universal units.",model:"Exchange fee",price:"1 IU = ₹1,001 (gold-pegged)",tam:"Travel fintech ₹8,000 Cr",competitor:"Wise / BookMyForex",diff:"Not currency exchange — a gold-pegged unit system. Budget in IUs, spend in any currency. Wallet-based.",link:"https://ipnotec-units.vercel.app/",pitch:["THE PROBLEM|Travel budgeting across currencies is confusing. Exchange rates fluctuate daily.","THE SOLUTION|IPNOTEC UNITS: gold-pegged at ₹1,001. Convert your budget to IUs. Spend anywhere.","THE MARKET|India outbound travel at ₹8,000 Cr. Forex market growing 18% YoY.","THE MODEL|2% exchange fee on conversion. Wallet maintenance. Premium travel planning at ₹499.","THE ASK|₹10L for wallet infrastructure + RBI sandbox application."]},
+  // SHOWCASE
+  {cat:"SHOWCASE",name:"IPNOTEC WATCH",usp:"The product gallery. See every venture in motion.",model:"Showcase",price:"—",tam:"—",competitor:"—",diff:"Visual portfolio of all IPNOTEC ventures. 16:9 presentation-ready.",link:"https://watch-eta-three.vercel.app/",pitch:null},
+  {cat:"SHOWCASE",name:"RICH DECK · NOSTALGIA PITCH",usp:"The ₹45L seed pitch. 19 slides. Full financial model.",model:"Investor deck",price:"Seed ₹45 Lakhs",tam:"—",competitor:"—",diff:"Complete pitch deck with unit economics, projections, and competitive analysis.",link:"https://rich-deck-2026.vercel.app/",pitch:null}
+];
+
+// ══════════════════════════════════════
+// RENDER VENTURES
+// ══════════════════════════════════════
+function renderVentures(){
+  var c=document.getElementById('ventureContainer');
+  var cats={};
+  V.forEach(function(v,i){
+    if(!cats[v.cat])cats[v.cat]=[];
+    cats[v.cat].push({v:v,i:i});
+  });
+  var html='';
+  var isWide=document.body.classList.contains('wide-mode');
+  for(var cat in cats){
+    html+='<div class="vert-label">'+cat+'</div>';
+    if(isWide)html+='<div class="v-grid">';
+    cats[cat].forEach(function(item){
+      var v=item.v,i=item.i;
+      html+='<div class="v-card glass" onclick="toggleVCard(this)">';
+      html+='<div class="v-name">'+v.name+'</div>';
+      html+='<div class="v-usp">'+v.usp+'</div>';
+      html+='<div class="v-details">';
+      html+='<div class="v-row"><span class="v-row-l">MODEL</span><span class="v-row-r">'+v.model+'</span></div>';
+      html+='<div class="v-row"><span class="v-row-l">PRICE</span><span class="v-row-r">'+v.price+'</span></div>';
+      if(v.tam!=='—')html+='<div class="v-row"><span class="v-row-l">TAM</span><span class="v-row-r">'+v.tam+'</span></div>';
+      if(v.competitor!=='—')html+='<div class="v-row"><span class="v-row-l">vs.</span><span class="v-row-r">'+v.competitor+'</span></div>';
+      if(v.diff!=='—')html+='<div class="v-row"><span class="v-row-l">USP</span><span class="v-row-r">'+v.diff+'</span></div>';
+      html+='<div class="v-links">';
+      html+='<a class="v-link" href="'+v.link+'" target="_blank" onclick="event.stopPropagation()">TRY DEMO →</a>';
+      if(v.link2)html+='<a class="v-link" href="'+v.link2+'" target="_blank" onclick="event.stopPropagation()">GROUP MODE →</a>';
+      if(v.pitch)html+='<a class="v-link" href="#" onclick="event.stopPropagation();event.preventDefault();openPitch('+i+')">VIEW PITCH →</a>';
+      html+='</div>';
+      html+='</div></div>';
+    });
+    if(isWide)html+='</div>';
+  }
+  c.innerHTML=html;
+}
+
+function toggleVCard(el){el.classList.toggle('expanded');}
+
+// ══════════════════════════════════════
+// PITCH OVERLAY
+// ══════════════════════════════════════
+function openPitch(i){
+  var v=V[i];if(!v.pitch)return;
+  var h='<div style="font-family:Audiowide;font-size:16px;color:#ffd600;margin-bottom:4px;margin-top:20px;">'+v.name+'</div>';
+  h+='<div style="font-size:11px;color:#ffab00;font-family:Share Tech Mono;letter-spacing:.15em;margin-bottom:16px;">MINI PITCH DECK</div>';
+  v.pitch.forEach(function(s,j){
+    var parts=s.split('|');
+    h+='<div class="pitch-slide"><div class="pitch-sn">0'+(j+1)+' / 05</div><div class="pitch-sh">'+parts[0]+'</div><div class="pitch-sp">'+parts[1]+'</div></div>';
+  });
+  document.getElementById('pitchContent').innerHTML=h;
+  document.getElementById('pitchOverlay').classList.add('show');
+}
+function closePitch(){document.getElementById('pitchOverlay').classList.remove('show');}
+
+// ══════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════
+var currentRole='';
+function showSection(id){
+  ['sec-landing','sec-role','sec-ventures','sec-founder','sec-ai'].forEach(function(s){
+    document.getElementById(s).style.display='none';
+  });
+  document.getElementById(id).style.display='block';
+  var nav=document.getElementById('mainNav');
+  if(id==='sec-ventures'||id==='sec-founder'||id==='sec-ai'){
+    nav.classList.add('show');
+    document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.toggle('active',b.dataset.s===id);});
+  }else{
+    nav.classList.remove('show');
+  }
+  window.scrollTo(0,0);
+}
+function navTo(id){showSection(id);}
+function enterAs(role){
+  currentRole=role;
+  if(role==='ai'){
+    showSection('sec-ai');
+  }else{
+    renderVentures();
+    showSection('sec-ventures');
+  }
+}
+
+// ══════════════════════════════════════
+// MODE TOGGLE
+// ══════════════════════════════════════
+function setMode(m){
+  document.body.classList.toggle('wide-mode',m==='wide');
+  document.querySelectorAll('.mode-btn').forEach(function(b,i){
+    b.classList.toggle('active',(m==='mobile'&&i===0)||(m==='wide'&&i===1));
+  });
+  if(document.getElementById('sec-ventures').style.display==='block')renderVentures();
+}
+
+// ══════════════════════════════════════
+// FOUNDER CONNECT
+// ══════════════════════════════════════
+function payFounderConnect(){
+  var btn=document.querySelector('.fc-btn');
+  btn.textContent='PROCESSING TICKET...';
+  btn.style.opacity='.6';
+  setTimeout(function(){
+    btn.textContent='✓ TICKET CONFIRMED · WELCOME';
+    btn.style.background='linear-gradient(135deg,#2e7d32,#43a047)';
+    btn.style.opacity='1';
+    btn.onclick=null;
+    document.getElementById('fcReveal').style.display='block';
+  },1800);
+}
+function lockVipId(){
+  var inp=document.getElementById('vipIdInput');
+  var id=inp.value.trim().toUpperCase();
+  if(!id){inp.style.borderColor='#e65100';return;}
+  document.getElementById('vipIdDisplay').textContent='IPNOTEC_'+id;
+  document.getElementById('vipConfirm').style.display='block';
+  inp.disabled=true;
+  inp.style.opacity='.5';
+}
+
+// ══════════════════════════════════════
+// AI CONCIERGE
+// ══════════════════════════════════════
+var aiLoading=false;
+function sendAI(){
+  if(aiLoading)return;
+  var input=document.getElementById('aiInput');
+  var q=input.value.trim();
+  if(!q)return;
+  input.value='';
+  var msgs=document.getElementById('aiMsgs');
+  var um=document.createElement('div');um.className='ai-msg user';um.textContent=q;msgs.appendChild(um);
+  var tm=document.createElement('div');tm.className='ai-msg bot typing';tm.textContent='Thinking...';msgs.appendChild(tm);
+  msgs.scrollTop=msgs.scrollHeight;
+  aiLoading=true;
+  var ctx=V.map(function(v){return v.name+': '+v.usp+' | Model: '+v.model+' | Price: '+v.price+' | vs '+v.competitor+' | Diff: '+v.diff;}).join('\n');
+  fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      model:'claude-sonnet-4-20250514',
+      max_tokens:1000,
+      messages:[{role:'user',content:'You are IPNOTEC AI Concierge for IPNOTEC CORP (CIN: U63122KA2026OPC214615), founded by Bharath Bholey in Bengaluru. The visitor role is: '+(currentRole||'general')+'.\n\nVentures:\n'+ctx+'\n\nFounder: Bharath Bholey, 20yr IT veteran (Ericsson 13yrs, Goldman Sachs, Cognizant, HP), BE VTU 2005, MBA Manipal 2025. Now building India\'s first verified networking ecosystem.\n\nAnswer concisely and intelligently. If asked about a specific venture, give the business model, USP, and competitor. If asked generally, give a compelling overview. Be warm but sharp.\n\nQuestion: '+q}]
+    })
+  }).then(function(r){return r.json();}).then(function(d){
+    tm.remove();
+    var bm=document.createElement('div');bm.className='ai-msg bot';
+    bm.textContent=d.content?d.content.map(function(c){return c.text||'';}).join(''):'I\'m having trouble connecting. Try again.';
+    msgs.appendChild(bm);
+    aiLoading=false;
+    msgs.scrollTop=msgs.scrollHeight;
+  }).catch(function(){
+    tm.remove();
+    var em=document.createElement('div');em.className='ai-msg bot';
+    em.textContent='Concierge is offline. Please try again.';
+    msgs.appendChild(em);
+    aiLoading=false;
+  });
+}
+
+// Init
+renderVentures();
+</script>
+</body>
+</html>
